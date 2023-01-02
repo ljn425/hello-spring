@@ -4,7 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+>>>>>>> 43ff1fc7c3c8273299a3e03d42a7c06c9995f5fd
 
 @Controller
 public class HelloController {
@@ -19,6 +22,7 @@ public class HelloController {
         model.addAttribute("name", name);
         return "hello-template";
     }
+<<<<<<< HEAD
 
     @GetMapping("hello-string")
     @ResponseBody // Http body 부분 데이터를 직접 넣어 주는 애노테이션
@@ -47,4 +51,6 @@ public class HelloController {
         }
     }
 
+=======
+>>>>>>> 43ff1fc7c3c8273299a3e03d42a7c06c9995f5fd
 }
