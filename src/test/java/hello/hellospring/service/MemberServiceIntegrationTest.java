@@ -1,35 +1,31 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest { // 단위 테스트
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach // 테스트 시작전 호출되는 메서드
-    public void beforeEach() {  //DI 개념 Dependency Injection , 외부에서 객체 주입
-        //System.out.println("beforeEach() 호출 ");
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach // 클래스 내 메서드 실행 끝날 때마다 호출되는 메서드
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+@SpringBootTest // 스프링 컨테니어와 Test 를 함께 실행한다. 보통 '통합 테스트' 라고 한다.
+@Transactional // Test 시작전에 트랜잭션을 걸고 Test 끝났을 때 roll back 해준다. @Test annotation 붙은 메서드마다 적용
+class MemberServiceIntegrationTest {
+    @Autowired  MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
     @Test
+    //@Commit // @Transactional 상관없이 DB 데이터 Commit 한다.
     void 회원가입() {
         // given : 이러한 상황이 주어졌을 때
         Member member = new Member();
-        member.setName("MinSu");
+        member.setName("spring");
 
         // when : 이러한 조건에서
         Long saveId = memberService.join(member);
@@ -65,13 +61,5 @@ class MemberServiceTest { // 단위 테스트
         }*/
 
 
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }
