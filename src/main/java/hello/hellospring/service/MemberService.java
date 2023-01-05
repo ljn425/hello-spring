@@ -4,11 +4,13 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional  // JPA 에서 데이터 변경 사항이 있을 경우 꼭 있어야한다. ex) insert, update, delete
 public class MemberService {
     private final MemberRepository memberRepository;
     public MemberService(MemberRepository memberRepository) {
